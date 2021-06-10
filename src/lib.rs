@@ -26,7 +26,7 @@
 //! ```
 
 #![no_std]
-#![deny(unsafe_op_in_unsafe_fn)]
+#![deny(unsafe_op_in_unsafe_fn, rustdoc::all)]
 
 pub mod error;
 pub mod handle;
