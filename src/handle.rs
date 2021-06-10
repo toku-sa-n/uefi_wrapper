@@ -11,6 +11,6 @@ impl Handle {
 }
 impl fmt::Debug for Handle {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_struct("Handle").finish()
+        write!(f, "Handle")
     }
 }
