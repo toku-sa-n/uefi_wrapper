@@ -3,6 +3,7 @@ use crate::status;
 use core::convert::TryInto;
 use r_efi::efi;
 
+/// An error type returned by functions of this crate.
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 pub struct Error<T> {
     status: status::NotSuccess,
