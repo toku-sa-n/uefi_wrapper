@@ -22,8 +22,11 @@ impl<T> Error<T> {
         }
     }
 
-    pub(crate) fn from_status_and_value(status: status::NotSuccess, value: T) -> Self {
-        Self { status, value }
+    pub(crate) fn from_status_and_value(status: efi::Status, value: T) -> Self {
+        Self {
+            status: status.into(),
+            value,
+        }
     }
 }
 impl From<efi::Status> for Error<()> {
