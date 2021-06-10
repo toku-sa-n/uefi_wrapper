@@ -1,3 +1,4 @@
+use core::convert::TryFrom;
 use num_derive::FromPrimitive;
 use num_traits::FromPrimitive;
 use r_efi::efi;
@@ -10,14 +11,20 @@ pub enum NotSuccess {
     Warning(Warning),
     Other(usize),
 }
-impl From<efi::Status> for NotSuccess {
-    fn from(s: efi::Status) -> Self {
-        let s = s.as_usize();
+impl TryFrom<efi::Status> for NotSuccess {
+    type Error = efi::Status;
 
-        FromPrimitive::from_usize(s).map_or_else(
-            || FromPrimitive::from_usize(s).map_or(Self::Other(s), Self::Warning),
-            Self::Error,
-        )
+    fn try_from(s: efi::Status) -> Result<Self, efi::Status> {
+        if s == efi::Status::SUCCESS {
+            Err(s)
+        } else {
+            let s = s.as_usize();
+
+            Ok(FromPrimitive::from_usize(s).map_or_else(
+                || FromPrimitive::from_usize(s).map_or(Self::Other(s), Self::Warning),
+                Self::Error,
+            ))
+        }
     }
 }
 

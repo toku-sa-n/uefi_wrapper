@@ -54,10 +54,7 @@ impl SystemTable {
         if s == efi::Status::SUCCESS {
             Ok(())
         } else {
-            Err(crate::Error::from_status_and_value(
-                s.into(),
-                (self, image_handle),
-            ))
+            Err(crate::Error::from_status_and_value(s, (self, image_handle)))
         }
     }
 
