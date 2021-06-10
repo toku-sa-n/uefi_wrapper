@@ -1,3 +1,5 @@
+//! Protocol definitions.
+
 pub mod console;
 pub mod media;
 
