@@ -1,3 +1,4 @@
+/// A module containing [`Error`] type definition.
 use crate::status;
 use core::convert::TryInto;
 use r_efi::efi;
