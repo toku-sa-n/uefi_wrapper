@@ -10,14 +10,17 @@ pub struct Error<T> {
     value: T,
 }
 impl<T> Error<T> {
+    /// Returns the status value.
     pub fn status(&self) -> &status::NotSuccess {
         &self.status
     }
 
+    /// Returns the value which is included when the instance of [`Error`] is created.
     pub fn value(&self) -> &T {
         &self.value
     }
 
+    /// Maps the value included in this [`Error`].
     pub fn map_value<U>(self, f: impl FnOnce(T) -> U) -> Error<U> {
         Error {
             status: self.status,
