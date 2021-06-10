@@ -1,3 +1,5 @@
+//! UEFI Status codes.
+
 use core::convert::TryFrom;
 use num_derive::FromPrimitive;
 use num_traits::FromPrimitive;
@@ -5,6 +7,7 @@ use r_efi::efi;
 
 const ERROR_BIT: usize = usize::MAX - (usize::MAX >> 1);
 
+/// UEFI Status which is not `SUCCESS`.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum NotSuccess {
     Error(Error),
@@ -28,6 +31,7 @@ impl TryFrom<efi::Status> for NotSuccess {
     }
 }
 
+/// UEFI Error status codes.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, FromPrimitive)]
 #[repr(usize)]
 #[allow(clippy::pub_enum_variant_names, clippy::enum_clike_unportable_variant)]
@@ -67,6 +71,7 @@ pub enum Error {
     HttpError = ERROR_BIT | 35,
 }
 
+/// UEFI Warning status codes.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, FromPrimitive)]
 pub enum Warning {
     UnknownGlyph = 1,
