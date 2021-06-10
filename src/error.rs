@@ -1,4 +1,5 @@
 use crate::status;
+use core::convert::TryInto;
 use r_efi::efi;
 
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
@@ -24,16 +25,13 @@ impl<T> Error<T> {
 
     pub(crate) fn from_status_and_value(status: efi::Status, value: T) -> Self {
         Self {
-            status: status.into(),
+            status: status.try_into().expect("`SUCCESS` is passed."),
             value,
         }
     }
 }
 impl From<efi::Status> for Error<()> {
     fn from(s: efi::Status) -> Self {
-        Self {
-            status: s.into(),
-            value: (),
-        }
+        Self::from_status_and_value(s, ())
     }
 }
