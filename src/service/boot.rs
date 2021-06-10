@@ -97,7 +97,7 @@ impl<'a> Boot<'a> {
             }))
         } else {
             Err(crate::Error::from_status_and_value(
-                s.into(),
+                s,
                 if s == efi::Status::BUFFER_TOO_SMALL {
                     Some(memory_map_size)
                 } else {
