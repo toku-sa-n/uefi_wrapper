@@ -1,5 +1,8 @@
+//! [`Result`] type for this crate.
+
 use r_efi::efi;
 
+/// [`core::result::Result`] which may contain [`crate::Error`].
 pub type Result<T, E = ()> = core::result::Result<T, crate::Error<E>>;
 
 pub(crate) fn from_status_and_value<T>(status: efi::Status, value: T) -> Result<T, ()> {

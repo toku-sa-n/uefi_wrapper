@@ -1,6 +1,9 @@
+//! A module containing the definition of [`Handle`].
+
 use core::fmt;
 use r_efi::efi;
 
+/// The Handler type.
 #[repr(transparent)]
 #[allow(missing_copy_implementations)]
 pub struct Handle(efi::Handle);
